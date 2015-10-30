@@ -1,0 +1,26 @@
+{
+    "name": "kevupton/referrals",
+    "description": "Referral System for laravel",
+    "keywords": ["laravel", "referrals"],
+    "type": "Extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Upton",
+            "email": "uptonkg@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "kevupton/beastcore": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kevupton\\Referrals\\": "src/Kevupton/Referrals/"
+        },
+        "files": [
+            "src/Kevupton/Referrals/Helpers/helpers.php"
+        ]
+    },
+    "minimum-stability": "stable"
+}
