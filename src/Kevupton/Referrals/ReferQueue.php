@@ -6,7 +6,7 @@ class ReferQueue extends ReferralModel {
 
     // validation rules
     public static $rules = array(
-        'user_id' => 'required|numeric|exists:subscribers,id',
+        'user_id' => 'numeric|exists:subscribers,id',
         'position' => 'required|numeric'
     );
 
