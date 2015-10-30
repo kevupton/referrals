@@ -22,7 +22,7 @@ class CreateTables extends Migration
         });
 
         Config::create([
-            'key' => 'signups',
+            'key' => 'start_at',
             'value' => $start_at
         ]);
 
@@ -64,12 +64,14 @@ class CreateTables extends Migration
             } );
 
             $repo = new \Kevupton\Referrals\Repositories\ReferQueueRepository();
-            $string = "INSERT INTO $prefix" . "refer_queue (position) VALUES";
-            for ($i = 0; $i < $start_at; $i++) {
-                $string .= "($i),";
+            if ($start_at) {
+                $string = "INSERT INTO $prefix" . "refer_queue (position) VALUES";
+                for ($i = 1; $i <= $start_at; $i++) {
+                    $string .= "($i),";
+                }
+                $string = trim($string, ",");
+                DB::insert($string);
             }
-            $string = trim($string, ",");
-            DB::insert($string);
         }
 
     }

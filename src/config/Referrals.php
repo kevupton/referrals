@@ -10,4 +10,9 @@ return array(
 
     //the number of positions jumped when a referral is made.
     'jump_count' => 10,
+
+    'addmore' => [
+        'interval' => 3600,
+        'amount' => 1
+    ]
 );

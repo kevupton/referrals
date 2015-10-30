@@ -43,24 +43,25 @@ class ReferQueueRepository extends BeastRepository {
     public function move(ReferQueue $item, $new_pos) {
         if ($item->position == $new_pos) return;
 
-        if ($new_pos < $item->positiion) {
-            $list = ReferQueue::where('position', '>=', $new_pos)
-                ->where('position', '<',  $item->position)
-                ->get();
+        $old_pos = $item->position;
 
-            foreach ($list as $refer_queue) {
-                $refer_queue->position++;
-                $refer_queue->save();
-            }
+        $item->position = -1;
+        $item->save();
+
+        if ($new_pos < $old_pos) {
+            ReferQueue::where('position', '>=', $new_pos)
+                ->where('position', '<',  $old_pos)
+                ->orderBy('position', 'desc')
+                ->update([
+                    'position' => \DB::raw('`position` + 1')
+                ]);
         } else {
-            $list = ReferQueue::where('position', '<=', $new_pos)
-                ->where('position', '>',  $item->position)
-                ->get();
-
-            foreach ($list as $refer_queue) {
-                $refer_queue->position--;
-                $refer_queue->save();
-            }
+            ReferQueue::where('position', '<=', $new_pos)
+                ->where('position', '>', $old_pos)
+                ->orderBy('position', 'asc')
+                ->update([
+                    'position' => \DB::raw('`position` - 1')
+                ]);
         }
 
         $item->position = $new_pos;
