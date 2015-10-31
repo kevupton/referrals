@@ -67,4 +67,10 @@ class ReferQueueRepository extends BeastRepository {
         $item->position = $new_pos;
         $item->save();
     }
+
+    public function findByUserID($user_id) {
+        $refer = ReferQueue::where('user_id', $user_id)->first();
+        if (!$refer) $this->throwException("Cannot find user with id: $user_id, in queue.");
+        return $refer;
+    }
 }

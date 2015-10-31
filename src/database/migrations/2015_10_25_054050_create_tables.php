@@ -59,11 +59,10 @@ class CreateTables extends Migration
 
             Schema::create( $prefix . 'refer_queue', function ( Blueprint $table ) {
                 $table->increments( 'id' );
-                $table->integer( 'user_id' )->nullable();
+                $table->integer( 'user_id' )->nullable()->unique();
                 $table->integer('position')->unique();
             } );
 
-            $repo = new \Kevupton\Referrals\Repositories\ReferQueueRepository();
             if ($start_at) {
                 $string = "INSERT INTO $prefix" . "refer_queue (position) VALUES";
                 for ($i = 1; $i <= $start_at; $i++) {
@@ -84,7 +83,7 @@ class CreateTables extends Migration
     public function down()
     {
         $config = Config::where('key','db_prefix')->first();
-        $prefix = $config->value;
+        $prefix = $config? $config->value: '';
 
         Schema::dropIfExists($prefix . 'refer_queue');
         Schema::dropIfExists($prefix . 'refer_flow');
