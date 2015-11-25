@@ -35,6 +35,7 @@ class CreateTables extends Migration
         if ( ! Schema::hasTable($prefix . 'subscribers')) {
             Schema::create($prefix . 'subscribers', function (Blueprint $table) {
                 $table->increments('id');
+                $table->string('mevu_tag', 32)->unique();
                 $table->string('name', 125);
                 $table->string('email');
                 $table->string('ref_code');
