@@ -1,8 +1,8 @@
 <?php namespace Kevupton\Referrals;
 
-use Kevupton\BeastCore\BeastModel;
+use Kevupton\Ethereal\Models\Ethereal;
 
-class ReferralModel extends BeastModel {
+class ReferralModel extends Ethereal {
 
     /**
      * Defines the prefix for the table.

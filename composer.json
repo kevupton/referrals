@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": ">=5.3",
-        "kevupton/beastcore": "^1.0"
+        "kevupton/ethereal": "^1.0"
     },
     "autoload": {
         "psr-4": {

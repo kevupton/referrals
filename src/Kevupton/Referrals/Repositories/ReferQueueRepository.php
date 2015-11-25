@@ -1,10 +1,10 @@
 <?php namespace Kevupton\Referrals\Repositories;
 
-use Kevupton\BeastCore\Repositories\BeastRepository;
+use Kevupton\Ethereal\Repositories\Repository;
 use Kevupton\Referrals\Exceptions\ReferralException;
 use Kevupton\Referrals\ReferQueue;
 
-class ReferQueueRepository extends BeastRepository {
+class ReferQueueRepository extends Repository {
     const TICKETING_HOLDING_TIME = 15;
 
     protected $exceptions = [
