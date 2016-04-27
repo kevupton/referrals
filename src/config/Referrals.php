@@ -11,8 +11,9 @@ return array(
     //the number of positions jumped when a referral is made.
     'jump_count' => 10,
 
+    //How often to add an extra fake referral
     'addmore' => [
-        'interval' => 3600,
-        'amount' => 1
+        'interval' => 3600, //the time between each insert
+        'amount' => 1 //the amount to insert
     ]
 );

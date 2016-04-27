@@ -24,10 +24,12 @@ class MoveInQueue extends Job implements SelfHandling, ShouldQueue
      * @var ReferQueueRepository
      */
     protected $repo;
+
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param ReferQueue $item
+     * @param $new_position
      */
     public function __construct(ReferQueue $item, $new_position)
     {
