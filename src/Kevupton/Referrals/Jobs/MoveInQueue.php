@@ -47,7 +47,7 @@ class MoveInQueue extends Job implements SelfHandling, ShouldQueue
     {
         if ($this->attempts() > 2) {
             $this->release();
-        } else {
+        } else { //move to a new position
             $this->repo->move($this->item, $this->new_position);
         }
     }

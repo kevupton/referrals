@@ -14,8 +14,4 @@ class ReferQueue extends ReferralModel {
     protected $fillable = array(
         'user_id', 'position'
     );
-
-    public static $relationsData = array(
-        'user' => array(self::BELONGS_TO, Subscriber::class, 'user_id'),
-    );
 }

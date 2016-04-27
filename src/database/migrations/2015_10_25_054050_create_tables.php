@@ -31,30 +31,19 @@ class CreateTables extends Migration
             'value' => $prefix
         ]);
 
-
-        if ( ! Schema::hasTable($prefix . 'subscribers')) {
-            Schema::create($prefix . 'subscribers', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('mevu_tag', 32)->unique();
-                $table->string('name', 125);
-                $table->string('email');
-                $table->string('ref_code');
-                $table->tinyInteger('is_win_prize');
-                $table->integer('points');
-                $table->integer('referrals');
-                $table->timestamps();
-            });
-        }
-
-        if ( ! Schema::hasTable($prefix . 'refer_flow')) {
-
-            Schema::create( $prefix . 'refer_flow', function ( Blueprint $table ) {
-                $table->increments( 'id' );
-                $table->integer( 'user_id' );
-                $table->integer( 'refer_id' );
-                $table->timestamps();
-            } );
-        }
+//        if ( ! Schema::hasTable($prefix . 'subscribers')) {
+//            Schema::create($prefix . 'subscribers', function (Blueprint $table) {
+//                $table->increments('id');
+//                $table->string('mevu_tag', 32)->unique();
+//                $table->string('name', 125);
+//                $table->string('email');
+//                $table->string('ref_code');
+//                $table->tinyInteger('is_win_prize');
+//                $table->integer('points');
+//                $table->integer('referrals');
+//                $table->timestamps();
+//            });
+//        }
 
         if ( ! Schema::hasTable($prefix . 'refer_queue')) {
 

@@ -21,6 +21,12 @@ class ReferQueueRepository extends Repository {
         return ReferQueue::class;
     }
 
+    /**
+     * Adds an item to queue
+     *
+     * @param null $user_id
+     * @return static
+     */
     function addToQueue($user_id = null) {
         $first = ReferQueue::orderBy('position', 'desc')->first();
         if ($first) $position = $first->position;
@@ -40,6 +46,13 @@ class ReferQueueRepository extends Repository {
         return $ref;
     }
 
+    /**
+     * Moves the item to the new position, adjusting all queued element's positions
+     * in between
+     *
+     * @param ReferQueue $item
+     * @param $new_pos
+     */
     public function move(ReferQueue $item, $new_pos) {
         if ($item->position == $new_pos) return;
 
@@ -68,6 +81,12 @@ class ReferQueueRepository extends Repository {
         $item->save();
     }
 
+    /**
+     * Finds a user by id
+     *
+     * @param $user_id
+     * @return mixed
+     */
     public function findByUserID($user_id) {
         $refer = ReferQueue::where('user_id', $user_id)->first();
         if (!$refer) $this->throwException("Cannot find user with id: $user_id, in queue.");
