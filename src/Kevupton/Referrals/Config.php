@@ -5,6 +5,7 @@ class Config extends ReferralModel {
     // table name
     protected $table = 'config';
     protected $primaryKey = 'key';
+    public $timestamps = false;
 
     // validation rules
     public static $rules = array(

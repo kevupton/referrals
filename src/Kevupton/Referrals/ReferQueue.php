@@ -3,6 +3,7 @@
 class ReferQueue extends ReferralModel {
     // table name
     protected $table = 'refer_queue';
+    public $timestamps = false;
 
     // validation rules
     public static $rules = array(
