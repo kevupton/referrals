@@ -58,7 +58,7 @@ $refer_queue = ReferQueue::find(200);
 $new_pos = $ref_queue - ref_jumps();
 if ($new_pos < 0) $new_pos = 0;
 
-$this->dispatch(new MoveInQueue($refer_queue, $new_pos);
+$this->dispatch(new MoveInQueue($refer_queue, $new_pos));
 ```
 
 ---
