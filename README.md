@@ -1,14 +1,17 @@
-## Referrals ##
+# Referrals #
 Laravel Referral System integration. 
 
-### How it works ###
+---
+A bare-bones implementation.
+
+## How it works ##
 This referral system is based of queue jumping. The idea being that when someone signs up they are placed into a queue.
 Then whenever someone registers, they jump **X** places in the queue. 
 The idea behind the queue itself is that it is to slowly grow over a period of time, to simulate users signing up, and hence a demand. Or a queue to jump.
 
 ---
 
-### Config File ###
+## Config File ##
 This file handles everything to do with the queue itself. A commend on each field is there explaining what each does.
 ```php
 <?php
@@ -31,3 +34,23 @@ return array(
     ]
 );
 ```
+
+## The Jobs ##
+This packages uses the [Laravel Queue](https://laravel.com/docs/5.1/queues) to manage the sign-up queue. It is broken into 2 key jobs.
+The first being `AddMore` and the second being `MoveInQueue`.
+
+#### AddMore ####
+This class handles adding more empty/fake subscribers to the queue itself. To use this class all you have to do
+is call it once. Once it has run the first time it will continuously keep adding itself back to the queue, with the interval
+time specified in `referrals.addmore.interval`. Every time it runs it adds `referrals.addmore.amount` subscribers to the queue.
+
+**Calling the job: ` $this->dispatch(new AddMore()); `**
+
+
+#### MoveInQueue ####
+
+
+**Calling the job: ` $this->dispatch(new AddMore()); `**
+
+## The Models ##
+
