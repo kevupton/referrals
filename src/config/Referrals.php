@@ -10,9 +10,6 @@ return array(
 
     // the referral queue
     'queue' => [
-        // whether or not the queue will be active
-        'active' => true,
-
         //how many uses to pretend we have at the start.
         'start_at' => 1548,
 
@@ -28,7 +25,5 @@ return array(
     ],
 
     'referrals' => [
-        // whether or not this functionality is active
-        'active' => true,
     ]
 );

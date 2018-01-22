@@ -19,7 +19,7 @@ class Code extends Model
     public    $incrementing = false;
 
     public $rules = [
-        'user_id' => 'numeric|exists:subscribers,id',
+        'user_id' => 'required|integer',
         'code'    => 'required|string|max:32',
     ];
 

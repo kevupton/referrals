@@ -90,6 +90,11 @@ class ReferToken
         throw new InvalidReferCodeException('Invalid refer code provided');
     }
 
+    /**
+     * Determines whether the token is valid
+     *
+     * @return bool
+     */
     public function isValid ()
     {
         try {

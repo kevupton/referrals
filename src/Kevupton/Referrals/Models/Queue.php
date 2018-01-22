@@ -20,7 +20,7 @@ class Queue extends Model
 
     public $rules = [
         'position' => 'required|integer',
-        'user_id'  => 'integer',
+        'user_id'  => 'nullable|integer',
     ];
 
     protected $fillable = [

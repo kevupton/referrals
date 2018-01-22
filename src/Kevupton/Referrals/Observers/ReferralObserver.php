@@ -15,10 +15,12 @@ class ReferralObserver
 {
     /**
      * @param Model $user
-     * @throws InvalidReferCodeException
      */
     public function created (Model $user)
     {
-        referrals()->registerReferral($user);
+        try {
+            referrals()->registerReferral($user);
+        } catch (InvalidReferCodeException $e) {
+        }
     }
 }

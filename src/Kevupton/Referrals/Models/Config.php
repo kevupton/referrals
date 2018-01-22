@@ -20,7 +20,6 @@ class Config extends Model
         'value' => 'array'
     ];
 
-    // validation rules
     public $rules = [
         'key' => 'required|max:32',
     ];

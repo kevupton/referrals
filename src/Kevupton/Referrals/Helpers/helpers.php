@@ -41,20 +41,6 @@ if (!function_exists('ref_conf')) {
     }
 }
 
-if (!function_exists('ref_queue_active')) {
-    function ref_queue_active ()
-    {
-        return ref_conf('queue.active', false);
-    }
-}
-
-if (!function_exists('ref_referrals_active')) {
-    function ref_referrals_active ()
-    {
-        return ref_conf('referrals.active', false);
-    }
-}
-
 if (!function_exists('ref_parse_user')) {
     /**
      * @param $user_id
