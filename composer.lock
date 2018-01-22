@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0f09b46f81b9a39dc18ef4fcf0c52fa8",
-    "content-hash": "2c500ec1a4fabcb175e51abef1efb495",
+    "hash": "9637edeb7d54c30edfb884906bb46bab",
+    "content-hash": "1e9bbf332314e7a3e02b7cbe3bcb8760",
     "packages": [
         {
             "name": "kevupton/ethereal",
-            "version": "v2.4.2.3",
+            "version": "v2.4.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kevupton/ethereal.git",
-                "reference": "016d28e3d745f96139b7d26340fbfa85f57e610a"
+                "reference": "94f607f716f74a5c1a7769780680e05d477f977c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kevupton/ethereal/zipball/016d28e3d745f96139b7d26340fbfa85f57e610a",
-                "reference": "016d28e3d745f96139b7d26340fbfa85f57e610a",
+                "url": "https://api.github.com/repos/kevupton/ethereal/zipball/94f607f716f74a5c1a7769780680e05d477f977c",
+                "reference": "94f607f716f74a5c1a7769780680e05d477f977c",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "ethereal",
                 "laravel"
             ],
-            "time": "2018-01-22 05:38:32"
+            "time": "2018-01-22 16:00:49"
         },
         {
             "name": "kevupton/laravel-json-response",
