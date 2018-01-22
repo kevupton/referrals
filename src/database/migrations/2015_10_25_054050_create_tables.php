@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Kevupton\Referrals\Models\Config;
 use Kevupton\Referrals\Models\Queue;
-use Schema;
 
 class CreateTables extends Migration
 {
@@ -58,12 +58,12 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        $config = Config::where('key', 'db_prefix')->first();
+        $config = Config::get('db_prefix');
         $prefix = $config ? $config->value : '';
 
-        Schema::dropIfExists($prefix . 'refer_queue');
-        Schema::dropIfExists($prefix . 'refer_flow');
-        Schema::dropIfExists($prefix . 'subscribers');
+        Schema::dropIfExists($prefix . 'referrals');
+        Schema::dropIfExists($prefix . 'codes');
+        Schema::dropIfExists($prefix . 'queue');
         Schema::dropIfExists($prefix . 'config');
     }
 }
