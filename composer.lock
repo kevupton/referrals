@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b8a454cac2c59afaa5bddbbc8d7a05e5",
-    "content-hash": "81de1acaa4b98bfb286a50c3ecaa0205",
+    "hash": "0f09b46f81b9a39dc18ef4fcf0c52fa8",
+    "content-hash": "2c500ec1a4fabcb175e51abef1efb495",
     "packages": [
         {
             "name": "kevupton/ethereal",
@@ -108,16 +108,16 @@
         },
         {
             "name": "kevupton/laravel-package-service-provider",
-            "version": "v0.0.2",
+            "version": "v0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kevupton/laravel-package-service-provider.git",
-                "reference": "b479f7ac655acee658c78907fc76e0c8f90339b3"
+                "reference": "a3bcbc9e2f44781b8f6c80195b1e66af7d329f57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kevupton/laravel-package-service-provider/zipball/b479f7ac655acee658c78907fc76e0c8f90339b3",
-                "reference": "b479f7ac655acee658c78907fc76e0c8f90339b3",
+                "url": "https://api.github.com/repos/kevupton/laravel-package-service-provider/zipball/a3bcbc9e2f44781b8f6c80195b1e66af7d329f57",
+                "reference": "a3bcbc9e2f44781b8f6c80195b1e66af7d329f57",
                 "shasum": ""
             },
             "require-dev": {
@@ -133,12 +133,12 @@
             "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
-                    "name": "Kevin Upton",
+                    "name": "Kevin upton",
                     "email": "uptonkg@gmail.com"
                 }
             ],
             "description": "Service provider for laravel to allow for multiple implementations",
-            "time": "2017-12-03 08:43:54"
+            "time": "2018-01-22 11:39:49"
         }
     ],
     "packages-dev": [
