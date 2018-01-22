@@ -47,7 +47,7 @@ class CreateTables extends Migration
         if ($start_at >= 1) {
             Queue::insert(collect(range(1, $start_at))->map(function ($i) {
                 return ['position' => $i];
-            }));
+            })->toArray());
         }
     }
 

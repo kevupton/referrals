@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  */
 class Queue extends Model
 {
+    protected $table = 'queue';
     protected $primaryKey   = 'position';
     public    $incrementing = false;
     public    $timestamps   = false;

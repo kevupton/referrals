@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  */
 class Config extends Model
 {
+    protected $table = 'config';
     protected $primaryKey = 'key';
     protected $keyType = 'string';
     public $timestamps = false;

@@ -52,7 +52,7 @@ class QueueRepository
             return ['position' => $position];
         });
 
-        Queue::insert($range);
+        Queue::insert($range->toArray());
 
         return $this;
     }
