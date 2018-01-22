@@ -5,15 +5,30 @@ return array(
     //prefix to each of the tables in the database
     'database_prefix' => 'ref_',
 
-    //how many uses to pretend we have at the start.
-    'start_at' => 1548,
+    // the user associated to the referral
+    'user' => \App\User::class,
 
-    //the number of positions jumped when a referral is made.
-    'jump_count' => 10,
+    // the referral queue
+    'queue' => [
+        // whether or not the queue will be active
+        'active' => true,
 
-    //How often to add an extra fake referral
-    'addmore' => [
-        'interval' => 3600, //the time between each insert
-        'amount' => 1 //the amount to insert
+        //how many uses to pretend we have at the start.
+        'start_at' => 1548,
+
+        //the number of positions jumped when a referral is made.
+        'jump_count' => 10,
+
+        //How often to add an extra fake referral
+        'add_more' => [
+            'interval' => 3600, //the time between each insert in seconds
+            'amount' => 1 //the amount to insert
+        ],
+
+    ],
+
+    'referrals' => [
+        // whether or not this functionality is active
+        'active' => true,
     ]
 );

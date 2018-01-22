@@ -12,7 +12,12 @@
     ],
     "require": {
         "php": ">=5.3",
-        "kevupton/ethereal": "^2.0"
+        "kevupton/ethereal": "^v2.4.2.2",
+        "kevupton/laravel-package-service-provider": "^0.0.2"
+    },
+    "require-dev": {
+        "laravel/lumen-framework": "5.5.*",
+        "laravel/laravel": "5.5.*"
     },
     "autoload": {
         "psr-4": {

@@ -8,7 +8,8 @@ if (!function_exists('ref_prefix')) {
      *
      * @return string
      */
-    function ref_prefix() {
+    function ref_prefix ()
+    {
         return ref_conf('database_prefix');
     }
 }
@@ -19,8 +20,9 @@ if (!function_exists('ref_jumps')) {
      *
      * @return int
      */
-    function ref_jumps() {
-        return ref_conf('jump_count');
+    function ref_jumps ()
+    {
+        return ref_conf('queue.jump_count');
     }
 }
 
@@ -28,12 +30,60 @@ if (!function_exists('ref_conf')) {
     /**
      * Gets a config value from the config file.
      *
-     * @param string $prop the key property
+     * @param string $prop    the key property
      * @param string $default the default response
      *
      * @return mixed
      */
-    function ref_conf($prop, $default = '') {
-        return Config::get(REFERRAL_CONFIG . '.' . $prop, $default);
+    function ref_conf ($prop, $default = '')
+    {
+        return config(REFERRAL_CONFIG . '.' . $prop, $default);
+    }
+}
+
+if (!function_exists('ref_queue_active')) {
+    function ref_queue_active ()
+    {
+        return ref_conf('queue.active', false);
+    }
+}
+
+if (!function_exists('ref_referrals_active')) {
+    function ref_referrals_active ()
+    {
+        return ref_conf('referrals.active', false);
+    }
+}
+
+if (!function_exists('ref_parse_user')) {
+    /**
+     * @param $user_id
+     */
+    function ref_parse_user ($user_id)
+    {
+        $user = ref_user();
+        $user::findOrFail($user_id);
+    }
+}
+
+if (!function_exists('ref_user')) {
+    /**
+     * @return mixed
+     */
+    function ref_user ()
+    {
+        return ref_conf('user');
+    }
+}
+
+if (!function_exists('referrals')) {
+    /**
+     * Gets the referrals instance
+     *
+     * @return \Kevupton\Referrals\Referrals
+     */
+    function referrals ()
+    {
+        return app(\Kevupton\Referrals\Providers\ReferralsServiceProvider::SINGLETON);
     }
 }

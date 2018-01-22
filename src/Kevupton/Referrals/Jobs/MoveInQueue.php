@@ -2,40 +2,26 @@
 
 namespace Kevupton\Referrals\Jobs;
 
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Kevupton\Referrals\ReferQueue;
-use Kevupton\Referrals\Repositories\ReferQueueRepository;
+use Kevupton\Referrals\Models\Queue;
 
-class MoveInQueue extends Job implements SelfHandling, ShouldQueue
+class MoveInQueue extends Job
 {
-    use InteractsWithQueue, SerializesModels;
-
     /**
-     * @var ReferQueue
+     * @var Queue
      */
-    protected $item;
-
-    protected $new_position;
-
-    /**
-     * @var ReferQueueRepository
-     */
-    protected $repo;
+    public $item;
+    public $newPosition;
 
     /**
      * Create a new job instance.
      *
-     * @param ReferQueue $item
-     * @param $new_position
+     * @param Queue $item
+     * @param $newPosition
      */
-    public function __construct(ReferQueue $item, $new_position)
+    public function __construct(Queue $item, $newPosition)
     {
-        $this->item = $item;
-        $this->new_position = $new_position;
-        $this->repo = new ReferQueueRepository();
+        $this->item        = $item;
+        $this->newPosition = $newPosition;
     }
 
     /**
@@ -45,10 +31,9 @@ class MoveInQueue extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        if ($this->attempts() > 2) {
+        if ($this->attempts() > 3) {
             $this->release();
-        } else { //move to a new position
-            $this->repo->move($this->item, $this->new_position);
         }
+        $this->queue()->move($this->item->getUser(), $this->newPosition);
     }
 }

@@ -2,31 +2,21 @@
 
 namespace Kevupton\Referrals\Jobs;
 
-use App\Jobs\Job;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Kevupton\Referrals\ReferQueue;
-use Kevupton\Referrals\Repositories\ReferQueueRepository;
-
-class AddMore extends Job implements SelfHandling, ShouldQueue
+class AddMore extends Job
 {
-    use InteractsWithQueue, SerializesModels, DispatchesJobs;
+    public   $amount;
+    public   $interval;
 
-    /**
-     * @var ReferQueueRepository
-     */
-    protected $repo;
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param $amount
+     * @param $interval
      */
-    public function __construct()
+    public function __construct($amount, $interval)
     {
-        $this->repo = new ReferQueueRepository();
+        $this->amount = $amount;
+        $this->interval = $interval;
     }
 
     /**
@@ -36,14 +26,9 @@ class AddMore extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $interval = ref_conf('addmore.interval', 3600);
-        $amount = ref_conf('addmore.amount', 1);
+        $this->queue()->insertEmptyUsers($this->amount);
 
-        for ($i = 0; $i < $amount; $i++) {
-            $this->repo->addToQueue();
-        }
-
-        $job = (new AddMore())->delay($interval);
+        $job = (new AddMore($this->amount, $this->interval))->delay($this->interval);
 
         $this->dispatch($job);
     }

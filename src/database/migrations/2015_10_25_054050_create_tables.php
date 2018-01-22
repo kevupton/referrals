@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Kevupton\Referrals\Config;
+use Illuminate\Database\Schema\Blueprint;
+use Kevupton\Referrals\Models\Config;
+use Kevupton\Referrals\Models\Queue;
+use Schema;
 
 class CreateTables extends Migration
 {
@@ -14,55 +16,39 @@ class CreateTables extends Migration
     public function up()
     {
         $prefix = ref_prefix();
-        $start_at =  ref_conf('start_at', 0);
-        Schema::create($prefix . 'config', function(Blueprint $table) {
+        $start_at = ref_conf('queue.start_at', 0);
+
+        Schema::create($prefix . 'config', function (Blueprint $table) {
             $table->string('key', 32);
             $table->text('value');
             $table->primary('key');
         });
 
-        Config::create([
-            'key' => 'start_at',
-            'value' => $start_at
-        ]);
+        Config::set('start_at', $start_at);
+        Config::set('db_prefix', $prefix);
 
-        Config::create([
-            'key' => 'db_prefix',
-            'value' => $prefix
-        ]);
+        Schema::create($prefix . 'queue', function (Blueprint $table) {
+            $table->unsignedInteger('position')->primary();
+            $table->unsignedInteger('user_id')->nullable()->unique();
+        });
 
-//        if ( ! Schema::hasTable($prefix . 'subscribers')) {
-//            Schema::create($prefix . 'subscribers', function (Blueprint $table) {
-//                $table->increments('id');
-//                $table->string('mevu_tag', 32)->unique();
-//                $table->string('name', 125);
-//                $table->string('email');
-//                $table->string('ref_code');
-//                $table->tinyInteger('is_win_prize');
-//                $table->integer('points');
-//                $table->integer('referrals');
-//                $table->timestamps();
-//            });
-//        }
+        Schema::create($prefix . 'codes', function (Blueprint $table) {
+            $table->unsignedInteger('user_id')->primary();
+            $table->string('code', 32)->unique();
+            $table->timestamps();
+        });
 
-        if ( ! Schema::hasTable($prefix . 'refer_queue')) {
+        Schema::create($prefix . 'referrals', function (Blueprint $table) {
+            $table->unsignedInteger('user_id')->primary();
+            $table->unsignedInteger('by_user_id')->index();
+            $table->timestamps();
+        });
 
-            Schema::create( $prefix . 'refer_queue', function ( Blueprint $table ) {
-                $table->increments( 'id' );
-                $table->integer( 'user_id' )->nullable()->unique();
-                $table->integer('position')->unique();
-            } );
-
-            if ($start_at) {
-                $string = "INSERT INTO $prefix" . "refer_queue (position) VALUES";
-                for ($i = 1; $i <= $start_at; $i++) {
-                    $string .= "($i),";
-                }
-                $string = trim($string, ",");
-                DB::insert($string);
-            }
+        if ($start_at >= 1) {
+            Queue::insert(collect(range(1, $start_at))->map(function ($i) {
+                return ['position' => $i];
+            }));
         }
-
     }
 
     /**
@@ -72,8 +58,8 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        $config = Config::where('key','db_prefix')->first();
-        $prefix = $config? $config->value: '';
+        $config = Config::where('key', 'db_prefix')->first();
+        $prefix = $config ? $config->value : '';
 
         Schema::dropIfExists($prefix . 'refer_queue');
         Schema::dropIfExists($prefix . 'refer_flow');
