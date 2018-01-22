@@ -6,7 +6,7 @@
  * Time: 11:28 AM
  */
 
-namespace Kevupton\Referrals\Facades\Referrals;
+namespace Kevupton\Referrals\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Kevupton\Referrals\Providers\ReferralsServiceProvider;

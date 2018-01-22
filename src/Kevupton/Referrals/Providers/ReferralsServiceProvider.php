@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Kevupton\LaravelPackageServiceProvider\ServiceProvider;
-use Kevupton\Referrals\Facades\Referrals\ReferralsFacade;
+use Kevupton\Referrals\Facades\ReferralsFacade;
 use Kevupton\Referrals\Observers\ReferralObserver;
 use Kevupton\Referrals\Referrals;
 
@@ -23,7 +23,7 @@ class ReferralsServiceProvider extends ServiceProvider
             $user::observe(ReferralObserver::class);
         }
 
-        $this->registerConfig('/../../../config/Referrals.php', REFERRAL_CONFIG . '.php');
+        $this->registerConfig(__DIR__ . '/../../../config/config.php', REFERRAL_CONFIG . '.php');
         $this->loadMigrationsFrom(__DIR__ . '/../../../database/migrations');
     }
 
