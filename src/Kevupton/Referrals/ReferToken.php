@@ -8,8 +8,8 @@
 
 namespace Kevupton\Referrals;
 
-use App\Traits\HasMemory;
 use Illuminate\Database\Eloquent\Model;
+use Kevupton\Ethereal\Traits\HasMemory;
 use Kevupton\Referrals\Exceptions\InvalidReferCodeException;
 use Kevupton\Referrals\Models\Code;
 
