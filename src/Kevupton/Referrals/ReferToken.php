@@ -58,12 +58,16 @@ class ReferToken
      * Sets the referral token
      *
      * @param $token
+     * @throws InvalidReferCodeException
      */
     public function setToken ($token)
     {
         $this->clearMemory();
-        session([self::SESSION_NAME => $token]);
         $this->token = $token;
+
+        $this->validate();
+
+        session([self::SESSION_NAME => $token]);
     }
 
     /**

@@ -68,10 +68,13 @@ class Referrals
 
     /**
      * @param $token
+     * @return Referrals
+     * @throws InvalidReferCodeException
      */
     public function setToken ($token)
     {
         $this->token()->setToken($token);
+        return $this;
     }
 
     /**
