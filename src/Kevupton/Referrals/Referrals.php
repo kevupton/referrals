@@ -13,6 +13,7 @@ use Kevupton\Ethereal\Traits\HasMemory;
 use Kevupton\Referrals\Events\UserWasReferred;
 use Kevupton\Referrals\Exceptions\InvalidReferCodeException;
 use Kevupton\Referrals\Jobs\AddMore;
+use Kevupton\Referrals\Models\Code;
 use Kevupton\Referrals\Models\Referral;
 use Kevupton\Referrals\Repositories\QueueRepository;
 
@@ -79,11 +80,12 @@ class Referrals
 
     /**
      * @param Model $user
+     * @return Referrals
      * @throws InvalidReferCodeException
      */
     public function registerReferral (Model $user)
     {
-        $token = referrals()->token();
+        $token    = referrals()->token();
         $referrer = $token->validate();
 
         Referral::create([
@@ -96,5 +98,31 @@ class Referrals
             ->addToQueue($user);
 
         event(new UserWasReferred($user, $token->getUser()));
+
+        return $this;
+    }
+
+    /**
+     * Generates a code for the user if it does not already exist
+     *
+     * @param Model $user
+     * @return Referrals
+     */
+    public function generateCode (Model $user)
+    {
+        Code::generate($user);
+        return $this;
+    }
+
+    /**
+     * Returns the users referral code.
+     * If it does not exist, it will make one
+     *
+     * @param Model $user
+     * @return string
+     */
+    public function getReferralCode (Model $user)
+    {
+        return Code::generate($user)->code;
     }
 }

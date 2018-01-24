@@ -2,6 +2,7 @@
 
 namespace Kevupton\Referrals\Models;
 
+use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
@@ -27,12 +28,43 @@ class Code extends Model
         'user_id', 'code',
     ];
 
+    /**
+     * Returns the model from the configuration specified.
+     *
+     * @return Eloquent
+     */
     public function getUser ()
     {
         try {
             return ref_parse_user($this->user_id);
         } catch (ModelNotFoundException $e) {
             return null;
+        }
+    }
+
+    /**
+     * Returns the users' code otherwise, generates a code model for the specified user if it
+     * does not already exist.
+     *
+     * @param Eloquent $model
+     * @return Code
+     */
+    public static function generate (Eloquent $model)
+    {
+        try {
+            return Code::where('user_id', $model->getKey())
+                ->firstOrFail();
+        }
+        catch (ModelNotFoundException $e) {
+            do {
+                $code = str_random(32);
+                $exists = Code::query()->where('code', $code)->exists();
+            } while ($exists);
+
+            return Code::create([
+                'user_id' => $model->getKey(),
+                'code' => $code
+            ]);
         }
     }
 }

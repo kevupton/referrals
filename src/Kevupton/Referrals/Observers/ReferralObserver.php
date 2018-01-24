@@ -19,7 +19,9 @@ class ReferralObserver
     public function created (Model $user)
     {
         try {
-            referrals()->registerReferral($user);
+            referrals()
+                ->registerReferral($user)
+                ->generateCode($user);
         } catch (InvalidReferCodeException $e) {
         }
     }
