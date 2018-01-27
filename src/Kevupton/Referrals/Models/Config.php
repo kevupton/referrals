@@ -37,7 +37,7 @@ class Config extends Model
     public static function get($key, $defaultValue = null)
     {
         try {
-            return Config::firstOrFail($key)->value;
+            return Config::findOrFail($key)->value;
         } catch (ModelNotFoundException $e) {
             return $defaultValue;
         }

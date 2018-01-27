@@ -50,7 +50,7 @@ class ReferToken
                 ->where('code', $this->token)
                 ->first();
 
-            return $code->getUser();
+            return $code ? $code->getUser() : null;
         });
     }
 

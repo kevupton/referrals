@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Kevupton\Referrals\Models\Config;
 use Kevupton\Referrals\Models\Queue;
 
-class CreateTables extends Migration
+class CreateReferralTables extends Migration
 {
     /**
      * Run the migrations.
@@ -58,8 +58,7 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        $config = Config::get('db_prefix');
-        $prefix = $config ? $config->value : '';
+        $prefix = Config::get('db_prefix', ref_prefix());
 
         Schema::dropIfExists($prefix . 'referrals');
         Schema::dropIfExists($prefix . 'codes');

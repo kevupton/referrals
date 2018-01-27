@@ -44,11 +44,12 @@ if (!function_exists('ref_conf')) {
 if (!function_exists('ref_parse_user')) {
     /**
      * @param $user_id
+     * @return \Illuminate\Database\Eloquent\Model
      */
     function ref_parse_user ($user_id)
     {
         $user = ref_user();
-        $user::findOrFail($user_id);
+        return $user::findOrFail($user_id);
     }
 }
 

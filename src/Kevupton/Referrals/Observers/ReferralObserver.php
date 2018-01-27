@@ -20,8 +20,8 @@ class ReferralObserver
     {
         try {
             referrals()
-                ->registerReferral($user)
-                ->generateCode($user);
+                ->generateCode($user)
+                ->registerReferral($user);
         } catch (InvalidReferCodeException $e) {
         }
     }
