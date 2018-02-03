@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "kevupton/ethereal",
-            "version": "v2.4.4",
+            "version": "v2.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kevupton/ethereal.git",
-                "reference": "be63996033923f1432e62e491f9975e471d60037"
+                "reference": "89dc6c7191c48361c9bc20529eb0f4b1c8179cc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kevupton/ethereal/zipball/be63996033923f1432e62e491f9975e471d60037",
-                "reference": "be63996033923f1432e62e491f9975e471d60037",
+                "url": "https://api.github.com/repos/kevupton/ethereal/zipball/89dc6c7191c48361c9bc20529eb0f4b1c8179cc4",
+                "reference": "89dc6c7191c48361c9bc20529eb0f4b1c8179cc4",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "ethereal",
                 "laravel"
             ],
-            "time": "2018-01-27 16:51:02"
+            "time": "2018-01-27 16:58:37"
         },
         {
             "name": "kevupton/laravel-json-response",

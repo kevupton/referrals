@@ -4,6 +4,7 @@ namespace Kevupton\Referrals\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Kevupton\Referrals\Exceptions\ReferQueueException;
 
 /**
  * Class ReferQueue
@@ -29,11 +30,23 @@ class Queue extends Model
     ];
 
 
+    /**
+     * Gets the Queue model that belongs to a specific user
+     *
+     * @param Eloquent $user
+     * @return Queue
+     * @throws ReferQueueException
+     */
     public static function fromUser (Eloquent $user)
     {
-        return Queue::query()
-            ->where('user_id', $user->getKey())
-            ->firstOrFail();
+        try {
+            return Queue::query()
+                ->where('user_id', $user->getKey())
+                ->firstOrFail();
+        }
+        catch (ModelNotFoundException $e) {
+            throw new ReferQueueException('User does not exist in queue');
+        }
     }
 
     /**

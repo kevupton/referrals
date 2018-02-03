@@ -93,13 +93,38 @@ class Referrals
             'by_user_id' => $referrer->getKey(),
         ]);
 
-        $this->queue()
-            ->moveUp($referrer, ref_jumps())
-            ->addToQueue($user);
+        if ($this->queueEnabled()) {
+            $this->queue()->moveUp($referrer, ref_jumps());
+        }
 
         event(new UserWasReferred($user, $token->getUser()));
 
         return $this;
+    }
+
+    /**
+     * Adds a user to the queue
+     *
+     * @param Model $user
+     * @return $this
+     */
+    public function addToQueue (Model $user)
+    {
+        if ($this->queueEnabled()) {
+            $this->queue()->addToQueue($user);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Checks whether the queue is enabled
+     *
+     * @return boolean
+     */
+    public function queueEnabled ()
+    {
+        return (bool) ref_conf('queue.enabled', false);
     }
 
     /**

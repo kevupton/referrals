@@ -10,6 +10,8 @@ return array(
 
     // the referral queue
     'queue' => [
+        'enabled' => true,
+
         //how many uses to pretend we have at the start.
         'start_at' => 1548,
 
@@ -21,7 +23,6 @@ return array(
             'interval' => 3600, //the time between each insert in seconds
             'amount' => 1 //the amount to insert
         ],
-
     ],
 
     'referrals' => [
