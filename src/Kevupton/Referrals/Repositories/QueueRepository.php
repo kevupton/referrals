@@ -9,10 +9,10 @@ class QueueRepository
     /**
      * Adds an item to queue
      *
-     * @param null $user_id
+     * @param Model $user
      * @return Queue
      */
-    function addToQueue ($user_id = null)
+    function addToQueue (Model $user)
     {
         try {
             /** @var Queue $first */
@@ -25,7 +25,7 @@ class QueueRepository
         }
 
         return Queue::create([
-            'user_id'  => $user_id,
+            'user_id'  => $user->getKey(),
             'position' => $position,
         ]);
     }
