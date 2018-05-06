@@ -9,6 +9,7 @@
 namespace Kevupton\Referrals;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Kevupton\Ethereal\Traits\HasMemory;
 use Kevupton\Referrals\Events\UserWasReferred;
 use Kevupton\Referrals\Exceptions\InvalidReferCodeException;
@@ -102,6 +103,14 @@ class Referrals
         return $this;
     }
 
+    /**
+     * Gets the user that referred the input user.
+     * If no user referred the input user then return null,
+     * otherwise return the referrer.
+     *
+     * @param Model $user
+     * @return Model|null
+     */
     public function getReferrer (Model $user)
     {
         /** @var Referral $referral */
@@ -112,6 +121,43 @@ class Referrals
         }
 
         return null;
+    }
+
+    /**
+     * Gets the referral for the user. If the user was referred, then it will return a referral
+     * object. Otherwise it will return null.
+     *
+     * @param Model $user
+     * @return mixed
+     */
+    public function getReferral (Model $user)
+    {
+        /** @var Referral $referral */
+        return Referral::where('user_id', $user->getKey())->first();
+    }
+
+    /**
+     * Gets all the referrals that a user has made.
+     *
+     * @param Model $user
+     * @return Collection|Referral[]
+     */
+    public function getReferrals (Model $user)
+    {
+        /** @var Referral $referral */
+        return Referral::where('by_user_id', $user->getKey())->get();
+    }
+
+    /**
+     * Counts the total number of referrals that a user has made
+     *
+     * @param Model $user
+     * @return Collection|Referral[]
+     */
+    public function totalReferralsMade (Model $user)
+    {
+        /** @var Referral $referral */
+        return Referral::where('by_user_id', $user->getKey())->count();
     }
 
     /**
