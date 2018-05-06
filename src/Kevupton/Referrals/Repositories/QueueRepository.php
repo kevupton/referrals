@@ -127,6 +127,7 @@ class QueueRepository
             Queue::query()
                 ->where('position', '>=', $newPos)
                 ->where('position', '<', $oldPos)
+                ->orderBy('position', 'desc')
                 ->update([
                     'position' => \DB::raw('`position` + 1'),
                 ]);
@@ -134,6 +135,7 @@ class QueueRepository
             Queue::query()
                 ->where('position', '<=', $newPos)
                 ->where('position', '>', $oldPos)
+                ->orderBy('position', 'asc')
                 ->update([
                     'position' => \DB::raw('`position` - 1'),
                 ]);
