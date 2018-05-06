@@ -1,6 +1,7 @@
 <?php
 
 namespace Kevupton\Referrals\Models;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Class ReferQueue
@@ -13,15 +14,34 @@ namespace Kevupton\Referrals\Models;
  */
 class Referral extends Model
 {
-    protected $primaryKey = 'user_id';
-    public $incrementing = false;
+    protected $primaryKey   = 'user_id';
+    public    $incrementing = false;
 
     public $rules = [
-        'user_id' => 'required|integer',
-        'by_user_id' => 'required|integer'
+        'user_id'    => 'required|integer',
+        'by_user_id' => 'required|integer',
     ];
 
     protected $fillable = [
-        'user_id', 'by_user_id'
+        'user_id', 'by_user_id',
     ];
+
+
+    public function getReferrer ()
+    {
+        try {
+            return ref_parse_user($this->by_user_id);
+        } catch (ModelNotFoundException $e) {
+            return null;
+        }
+    }
+
+    public function getReferred ()
+    {
+        try {
+            return ref_parse_user($this->user_id);
+        } catch (ModelNotFoundException $e) {
+            return null;
+        }
+    }
 }

@@ -102,6 +102,18 @@ class Referrals
         return $this;
     }
 
+    public function getReferrer (Model $user)
+    {
+        /** @var Referral $referral */
+        $referral = Referral::where('user_id', $user->getKey())->first();
+
+        if ($referral) {
+            return $referral->getReferrer();
+        }
+
+        return null;
+    }
+
     /**
      * Adds a user to the queue
      *
@@ -124,7 +136,7 @@ class Referrals
      */
     public function queueEnabled ()
     {
-        return (bool) ref_conf('queue.enabled', false);
+        return (bool)ref_conf('queue.enabled', false);
     }
 
     /**
