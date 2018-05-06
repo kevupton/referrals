@@ -12,8 +12,8 @@
     ],
     "require": {
         "php": ">=5.3",
-        "kevupton/ethereal": "^2.4.7",
-        "kevupton/laravel-package-service-provider": "^0.0.4"
+        "kevupton/ethereal": "^2.4.8",
+        "kevupton/laravel-package-service-provider": "^0.0.5"
     },
     "require-dev": {
         "laravel/lumen-framework": "5.5.*",
